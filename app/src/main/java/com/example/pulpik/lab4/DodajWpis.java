@@ -20,7 +20,7 @@ public class DodajWpis extends AppCompatActivity {
         ArrayAdapter gatunki = new ArrayAdapter(
                 this,
                 android.R.layout.simple_spinner_dropdown_item,
-                new String[] {"Pies", "Kot", "Rybki"});
+                new String[] {"Pies","Kot","Koń","Gołąb","Kruk","Dzik","Karp","Osioł"});
         Spinner gatunek = (Spinner) findViewById
                 (R.id.input_gatunek);
         gatunek.setAdapter(gatunki);
@@ -44,7 +44,12 @@ public class DodajWpis extends AppCompatActivity {
                 switch (zwierz.getGatunek()) {
                     case "Pies": i = 0; break;
                     case "Kot": i = 1; break;
-                    case "Rybki": i = 2;break;
+                    case "Koń": i = 2;break;
+                    case "Gołąb": i = 3;break;
+                    case "Kruk": i = 4;break;
+                    case "Dzik": i = 5;break;
+                    case "Karp": i = 6;break;
+                    case "Osioł": i = 7;break;
                     default: i = -1;
                 }
                 formGatunek.setSelection(i);

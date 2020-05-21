@@ -6,9 +6,12 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<String> target;
     private SimpleCursorAdapter adapter;
     private MySQLite db = new MySQLite(this);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +32,34 @@ public class MainActivity extends AppCompatActivity {
         this.adapter = new SimpleCursorAdapter(this,android.R.layout.simple_list_item_2, db.lista(),new String[] {"_id", "gatunek"},new int[] {android.R.id.text1, android.R.id.text2},SimpleCursorAdapter.IGNORE_ITEM_VIEW_TYPE);
         ListView listview = (ListView) findViewById(R.id.listview);
         listview.setAdapter(this.adapter);
+
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> adapter, View view, int pos, long id)
+            {
+                TextView idz = (TextView) view.findViewById(android.R.id.text1);
+                Animal zwierz = db.pobierz(Integer.parseInt(idz.getText().toString()));
+                Intent intencja = new
+                        Intent(getApplicationContext(),
+                        DodajWpis.class);
+
+                intencja.putExtra("element", zwierz);
+                startActivityForResult(intencja, 2);
+            }
+        });
+
+        listview.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean
+            onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                TextView idz = (TextView) view.findViewById(android.R.id.text1);
+                db.usun(idz.getText().toString());
+                adapter.changeCursor(db.lista());
+                adapter.notifyDataSetChanged();
+                return true;
+            }
+        });
     };
 
     @Override
