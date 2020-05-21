@@ -2,6 +2,7 @@ package com.example.pulpik.lab4;
 
 import java.io.Serializable;
 
+
 public class Animal implements Serializable {
 
     private int id;
@@ -30,6 +31,6 @@ public class Animal implements Serializable {
     public String getKolor(){return kolor;}
     public float getWielkosc(){return wielkosc;}
     public int getId(){return id;}
-    public int setId(int id){this.id=id;}
+    public void setId(int id){this.id=id;}
 
 }
