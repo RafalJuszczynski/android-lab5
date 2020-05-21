@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intencja, 2);
             }
         });
-
+//
         listview.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean
